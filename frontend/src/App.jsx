@@ -1,4 +1,4 @@
-// import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './index.css'
 import Header from './components/Header';
 import Main from './components/Main';
@@ -56,13 +56,22 @@ function Sidebar() {
 }
 
 function App() {
-  // const [count, setCount] = useState(0)
+  const [currBasket, setCurrBasket] = useState("basket1");
+
+  const returnToHome = () => {
+    setCurrBasket("");
+  }; 
+  console.log("App page curr basket:", currBasket);
+
 
   return (
     <>
-      <Header />
+      <Header 
+        basket={currBasket}
+        returnToHome={returnToHome}
+      />
       <div className="main_and_side">
-        <Main />
+        <Main basket={currBasket}/>
         <Sidebar />
       </div>
     </>
