@@ -1,5 +1,7 @@
 // import { useState } from 'react'
 import './index.css'
+import Header from './components/Header';
+import Main from './components/Main';
 
 const baskets = [
     "basket1",
@@ -25,25 +27,25 @@ const basket1 = {
     ]
 }
 
-function Header() {
-  return (
-    <div className='header'>
-      <a href="http://localhost:5173">HOME</a>
-      <h1>Welcome to the GREASETRAP</h1>
-    </div>
-  )
-}
+// function Header() {
+//   return (
+//     <div className='header'>
+//       <a href="http://localhost:5173">HOME</a>
+//       <h1>Welcome to the GREASETRAP</h1>
+//     </div>
+//   )
+// }
 
-function Main() {
-  return (
-    <div className='main'>
-      <form action="">
-        <input placeholder='Basket name' />
-        <button>Create Basket</button>
-      </form>
-    </div>
-  )
-}
+// function Main() {
+//   return (
+//     <div className='main'>
+//       <form action="">
+//         <input placeholder='Basket name' />
+//         <button>Create Basket</button>
+//       </form>
+//     </div>
+//   )
+// }
 
 function Sidebar() {
   return (
