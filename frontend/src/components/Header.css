@@ -1,7 +1,15 @@
 .header {
-  background-color: grey;
+  background-color: rgb(194, 211, 216);
 }
 
 .header h1 {
   padding-left: 250px;
+}
+
+.header a {
+
+}
+
+.header a:hover {
+  color: blue;
 }

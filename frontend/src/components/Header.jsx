@@ -17,7 +17,6 @@ Two Headers:
 
 */
 
-const testBasket = "basket1";
 
 
 
