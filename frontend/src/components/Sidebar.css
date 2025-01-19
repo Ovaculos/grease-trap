@@ -5,3 +5,7 @@
   padding: 50px;
   background-color: grey;
 }
+
+.sidebar button:hover {
+  cursor: pointer;
+}

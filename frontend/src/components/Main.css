@@ -1,4 +1,7 @@
-
 .main button {
   color: blue;
+}
+
+.main button:hover {
+  cursor: pointer;
 }
