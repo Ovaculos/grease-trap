@@ -62,9 +62,6 @@ function App() {
     setCurrBasket("");
   }; 
 
-  console.log("App page curr basket:", currBasket);
-
-
   return (
     <>
       <Header 
