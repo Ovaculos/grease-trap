@@ -1,15 +1,14 @@
 CREATE TABLE baskets (
-    id serial PRIMARY KEY,
-    uuid uuid DEFAULT gen_random_uuid () UNIQUE,
+    id uuid PRIMARY KEY DEFAULT gen_random_uuid (),
     name text NOT NULL UNIQUE
 );
 
 CREATE TABLE requests (
-    id serial PRIMARY KEY,
-    basket_uuid uuid NOT NULL REFERENCES baskets (uuid) ON DELETE CASCADE,
-    mongo_id integer UNIQUE,
+    id uuid PRIMARY KEY DEFAULT gen_random_uuid (),
+    basket_id uuid NOT NULL REFERENCES baskets ON DELETE CASCADE,
     header text,
     method text,
     query text,
-    date_time integer
+    path text,
+    date_time integer DEFAULT EXTRACT(EPOCH FROM NOW())::INTEGER
 );
