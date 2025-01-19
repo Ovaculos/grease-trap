@@ -56,7 +56,7 @@ function Sidebar() {
 }
 
 function App() {
-  const [currBasket, setCurrBasket] = useState("");
+  const [currBasket, setCurrBasket] = useState("basket1");
 
   const returnToHome = () => {
     setCurrBasket("");

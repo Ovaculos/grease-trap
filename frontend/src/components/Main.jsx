@@ -1,4 +1,6 @@
+import { useEffect, useState } from 'react'
 import './Main.css';
+import RequestList from './RequestList';
 
 /*
 Planning:
@@ -37,6 +39,12 @@ const basket1 = {
 // eslint-disable-next-line react/prop-types
 function Main({ basket }) {
   // useEffect to get requests for this basket
+  const [requests, setRequests] = useState([]);
+
+  useEffect(() => {
+    // AJAX call to get request for this basket;
+    setRequests(basket1.requests);
+  }, []);
 
   if (!basket) { //!basket
     return (
@@ -51,6 +59,7 @@ function Main({ basket }) {
     return (
       <div className='main'>
         <p>Request will go here</p>
+        <RequestList requests={requests}/>
       </div>
     )
   }
