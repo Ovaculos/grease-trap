@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import './index.css'
 import Header from './components/Header';
 import Main from './components/Main';
+import Sidebar from './components/Sidebar';
 
 const baskets = [
     "basket1",
@@ -27,34 +28,6 @@ const basket1 = {
     ]
 }
 
-// function Header() {
-//   return (
-//     <div className='header'>
-//       <a href="http://localhost:5173">HOME</a>
-//       <h1>Welcome to the GREASETRAP</h1>
-//     </div>
-//   )
-// }
-
-// function Main() {
-//   return (
-//     <div className='main'>
-//       <form action="">
-//         <input placeholder='Basket name' />
-//         <button>Create Basket</button>
-//       </form>
-//     </div>
-//   )
-// }
-
-function Sidebar() {
-  return (
-    <div className='sidebar'>
-      <p>Paragraph</p>
-    </div>
-  )
-}
-
 function App() {
   const [currBasket, setCurrBasket] = useState("");
 
@@ -62,8 +35,12 @@ function App() {
     setCurrBasket("");
   }; 
 
-  console.log("App page curr basket:", currBasket);
+  const handleButtonClick = (basketName) => {
+    console.log("button clicked");
+    setCurrBasket(basketName);
+  }
 
+  console.log("App page curr basket:", currBasket);
 
   return (
     <>
@@ -73,7 +50,8 @@ function App() {
       />
       <div className="main_and_side">
         <Main basket={currBasket}/>
-        <Sidebar />
+        <Sidebar baskets={baskets} onChange={handleButtonClick}/>
+        {console.log(currBasket)}
       </div>
     </>
   )
