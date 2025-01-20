@@ -29,7 +29,7 @@ const basket1 = {
 }
 
 function App() {
-  const [currBasket, setCurrBasket] = useState("");
+  const [currBasket, setCurrBasket] = useState("basket1");
 
   const returnToHome = () => {
     setCurrBasket("");
@@ -40,7 +40,6 @@ function App() {
     setCurrBasket(basketName);
   }
 
-  console.log("App page curr basket:", currBasket);
 
   return (
     <>
