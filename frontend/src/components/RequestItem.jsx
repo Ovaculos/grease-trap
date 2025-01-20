@@ -18,23 +18,23 @@ Each request has two parts:
 
 function RequestItem({ req }) {
   return (
-    <li className="request-item">
-      <div className="request-info">
+    <tr className="request-item">
+      <td className="info">
         <ul>
-          <li>{req.method}</li>
-          <li>Time:{req.date_time}</li>
-          <li>Date:</li>
+          <li>Method</li>
+          <li>Date</li>
         </ul>
-      </div>
-      <div className="request-data">
+        
+      </td>
+      <td className="data">
         <ul>
-          <li>Original Request Path</li>
-          <li>Headers:{req.headers}</li>
-          <li>Query Params:{req.query}</li>
-          <li>Body:{req.body.toString()}</li>
+          <li>Path</li>
+          <li>Header</li>
+
         </ul>
-      </div>
-    </li>
+      </td>
+    </tr>
+
   )
 }
 

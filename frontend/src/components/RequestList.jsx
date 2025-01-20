@@ -44,11 +44,13 @@ function RequestList() {
   return (
     <>
       <p>Requests: {requests.length}</p>
-      <ul>
-        {requests.map((req, idx) => {
-          return <RequestItem key={idx} req={req} />;
-        })}
-      </ul>
+      <table>
+        <tbody>
+          {requests.map((req, idx) => {
+            return <RequestItem key={idx} req={req} />;
+          })}
+        </tbody>
+      </table>
     </>
 
 

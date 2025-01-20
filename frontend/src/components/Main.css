@@ -10,17 +10,17 @@ ul {
 }
 
 .request-item {
-  display: inline-block;
-  background-color: grey;
+  /* display: inline-block; */
+  /* background-color: purple; */
   margin: 10px;
   padding: 10px;
 }
 
-.request-info {
+/* .request-info {
   float: left;
   width: 20%;
 }
 
 .request-data {
   float: right;
-}
+} */
