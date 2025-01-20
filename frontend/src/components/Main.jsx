@@ -35,7 +35,6 @@ function Main({ basket }) {
   } else {
     return (
       <div id="request-page" className='main'>
-        <p>Request will go here</p>
         <RequestList />
       </div>
     )
