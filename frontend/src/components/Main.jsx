@@ -22,7 +22,6 @@ Two Main Pages:
 // eslint-disable-next-line react/prop-types
 function Main({ basket }) {
 
-
   if (!basket) { //!basket
     return (
       <div className='main'>

@@ -17,6 +17,7 @@ import RequestItem from "./RequestItem";
 const basket1 = {
   "requests": [
     {
+      "path": "/basket1/github?hello=world&laren=tired",
       "headers": "Accept: */* \nAccept-Encoding: gzip, deflate \nConnection: close \nUser-Agent: HTTPie/3.2.4 \nX-City: La Crosse \nX-Country: US \nX-Forwarded-For: 184.97.26.131 \nX-Real-Ip: 184.97.26.131",
       "method": "GET",
       "query": "hello=world&laren=tired",
@@ -24,11 +25,12 @@ const basket1 = {
       "date_time": 1737224774543
     },
     {
+      "path": "/basket1",
       "headers":"Accept: */* \nAccept-Encoding: gzip, deflate \nConnection: close \nUser-Agent: HTTPie/3.2.4 \nX-City: La Crosse \nX-Country: US \nX-Forwarded-For: 184.97.26.131 \nX-Real-Ip: 184.97.26.131",
       "method": "POST",
       "query": "",
       "body": {"id":13399049247,"kind":"comment_created"},
-      "date_time": 1737224774549
+      "date_time": 1737417679576
     }
   ]
 }
