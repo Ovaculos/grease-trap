@@ -71,3 +71,7 @@ body {
   padding: 8px;
   font-family: 'Lacquer';
 }
+
+button {
+  cursor: pointer;
+}
