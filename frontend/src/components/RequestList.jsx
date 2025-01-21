@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
-// pass basket's requests to Request List
+
 import { useEffect, useState } from "react";
 import RequestItem from "./RequestItem";
 import { getRequests } from "../services/basketService";
@@ -7,7 +8,6 @@ import { getRequests } from "../services/basketService";
 
 function RequestList({ currBasket }) {
   const [requests, setRequests] = useState([]);
-  console.log("Requests state:", requests);
 
   useEffect(() => {
     fetchRequests();

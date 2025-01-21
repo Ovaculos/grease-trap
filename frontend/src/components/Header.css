@@ -6,10 +6,6 @@
   padding-left: 250px;
 }
 
-.header a {
-
-}
-
 .header a:hover {
   color: blue;
   cursor: pointer;

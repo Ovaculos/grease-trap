@@ -28,7 +28,6 @@ function App() {
   }; 
 
   const handleButtonClick = (basketName) => {
-    console.log("button clicked");
     setCurrBasket(basketName);
   }
 

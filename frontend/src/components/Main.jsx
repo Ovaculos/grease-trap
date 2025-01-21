@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
 import './Main.css';
@@ -57,11 +58,7 @@ function Main({ currBasket, baskets, setBaskets }) {
 
       if (isValidBasketName(basketName)) {
         const newBasket = { name: basketName}
-
-        const data = await createBasket(newBasket);
-        console.log("In addNewBasket:", data);
-
-      
+        const data = await createBasket(newBasket);      
         setBaskets(baskets.concat([data]));
         setValidRandomURL();
       }
