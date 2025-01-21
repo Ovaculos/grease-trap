@@ -4,7 +4,7 @@ import Header from './components/Header';
 import Main from './components/Main';
 import Sidebar from './components/Sidebar';
 
-const baskets = [
+const basketsEx = [
     "basket1",
     "basket2",
     "basket3"
@@ -30,6 +30,13 @@ const basket1 = {
 
 function App() {
   const [currBasket, setCurrBasket] = useState("basket1");
+  const [baskets, setBaskets] = useState([]);
+
+  useEffect(() => {
+    // AJAX requst to get real baskets
+    setBaskets(basketsEx);
+
+  }, []);
 
   const returnToHome = () => {
     setCurrBasket("");
@@ -48,9 +55,11 @@ function App() {
         returnToHome={returnToHome}
       />
       <div className="main_and_side">
-        <Main basket={currBasket}/>
+        <Main currBasket={currBasket}
+              baskets={baskets}
+              setBaskets={setBaskets}
+        />
         <Sidebar baskets={baskets} onChange={handleButtonClick}/>
-        {console.log(currBasket)}
       </div>
     </>
   )
