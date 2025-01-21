@@ -1,15 +1,20 @@
 body {
-  background-color: #4d4344;
+  background-color: #453c3d;
   color: #e99f6a;
+  font-family: 'Lacquer';
 }
+
 .header {
   display: block;
-  font-family: "Lacquer";
+  /*font-family: "Lacquer";*/
   background-color: #e99f6a;
-  color: #4d4344;
+  color: #453c3d;
   border-radius: 10px;
   text-wrap: nowrap;
   margin-bottom: 30px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 10px;
 }
 
 .header a, .header h1 {
@@ -20,13 +25,49 @@ body {
 
 .header a {
   cursor: pointer;
-  padding-right: 110px;
+  padding-right: 100px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  font-size: 22px;
+  /*font-family: "Lacquer";*/
+  gap: 16px;
+}
+
+.sidebar {
+  width: 200px;
+  text-align: center;
+  border: 5px double #a50e07;
+  margin-right: 20px;
+  padding-bottom: 30px;
+  border-radius: 10px;
+}
+
+.sidebar button {
+  font-size: 16px;
+  margin-bottom: 8px;
+  padding: 8px;
+  font-family: 'Lacquer';
+  width: 120px;
+  word-wrap: break-word;
 }
 
 .main {
-  display: inline-block;
-  padding-left: 10px;
-  /* display: left;
-  border: 1px solid;
-  width: 50%; */
+  margin-left: 20px;
+  flex: 1;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.form {
+  padding-top: 20px;
+}
+
+.form input, .form button {
+  font-size: 16px;
+  margin-bottom: 8px;
+  padding: 8px;
+  font-family: 'Lacquer';
 }

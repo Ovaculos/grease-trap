@@ -6,8 +6,9 @@ import Sidebar from './components/Sidebar';
 
 const baskets = [
     "basket1",
-    "basket2",
-    "basket3"
+    "Onomonopoeia",
+    "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "One Hundred Thousand Million Billion Trillion"
   ]
 
 const basket1 = {
@@ -48,7 +49,7 @@ function App() {
         basket={currBasket}
         returnToHome={returnToHome}
       />
-      <div className="main_and_side">
+      <div className="container">
         <Main basket={currBasket}/>
         <Sidebar baskets={baskets} onChange={handleButtonClick}/>
         {console.log(currBasket)}

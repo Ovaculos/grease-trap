@@ -1,5 +1,3 @@
-//import './Main.css';
-
 /*
 Planning:
 
@@ -40,7 +38,7 @@ function Main({ basket }) {
 
   if (!basket) { //!basket
     return (
-      <div className='main'>
+      <div className="main form">
         <form action="">
           <input placeholder='Basket name' />
           <button>Create Basket</button>
@@ -49,7 +47,7 @@ function Main({ basket }) {
     )
   } else {
     return (
-      <div className='main'>
+      <div className='main requests'>
         <p>Request will go here</p>
       </div>
     )
