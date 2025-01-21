@@ -6,14 +6,8 @@ import Main from './components/Main';
 import Sidebar from './components/Sidebar';
 import { getBaskets } from './services/basketService';
 
-const basketsEx = [
-    "basket1",
-    "basket2",
-    "basket3"
-  ]
-
 function App() {
-  const [currBasket, setCurrBasket] = useState("basket1");
+  const [currBasket, setCurrBasket] = useState("");
   const [baskets, setBaskets] = useState([]);
 
   useEffect(() => {
@@ -37,7 +31,6 @@ function App() {
     console.log("button clicked");
     setCurrBasket(basketName);
   }
-
 
   return (
     <>

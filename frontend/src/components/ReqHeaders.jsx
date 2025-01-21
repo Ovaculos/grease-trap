@@ -4,6 +4,8 @@ import { useState } from "react";
 function ReqHeaders( { headers }) {
   const [isOpen, setIsOpen] = useState(false);
 
+  console.log(headers);
+
   return (
     <>
       <button onClick={() => setIsOpen(!isOpen)}>Headers</button>

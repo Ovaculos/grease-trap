@@ -88,31 +88,11 @@ function Main({ currBasket, baskets, setBaskets }) {
   } else {
     return (
       <div id="request-page" className='main'>
-        <RequestList />
+        <RequestList currBasket={currBasket}/>
       </div>
     )
   }
 }
-
-
-const generateRandomURL = () => {
-  // 7 chars long
-  const VALID_CHARS = '0123456789abcdefghijklmnopqrstuvwxyz_-.'
-  const NUM_OF_CHARS = 7;
-
-  let randomURL = "";
-
-  for (let idx = 0; idx <= NUM_OF_CHARS; idx += 1) {
-    const randomIdx = Math.floor(Math.random() * VALID_CHARS.length);
-    const randomChar = VALID_CHARS[randomIdx];
-
-    randomURL += randomChar;
-  }
-
-  return randomURL;
-}
-
-generateRandomURL();
 
 
 export default Main;

@@ -4,28 +4,6 @@ import ReqBody from "./ReqBody";
 import ReqHeaders from "./ReqHeaders";
 import ReqQueryParams from "./ReqQueryParams";
 
-/*
-Each request has two parts:
-
-1. Meta Data
-  - Method
-  - Time
-  - Date
-2. Request Content
-  - Request Path
-  - Headers
-  - Query Params (only shows if present)
-  - Body (only shows if present)
-
-
-Clickable content:
-- Headers, Query Params, Body
-
-- Body: eventual try to format as a code block not a string
-
-*/
-
-
 function RequestItem({ req }) {
   const dateObj = new Date(req.date_time);
   const time = dateObj.toLocaleTimeString();
@@ -44,7 +22,7 @@ function RequestItem({ req }) {
       <td className="data">
         <ul>
           <li>{req.path}</li>
-          <ReqHeaders headers={req.headers}/>
+          <ReqHeaders headers={req.header}/>
           {req.query ? <ReqQueryParams queryParams={req.query} /> : ""}
           {req.body ? <ReqBody body={req.body} /> : ""}
         </ul>

@@ -2,37 +2,21 @@
 // pass basket's requests to Request List
 import { useEffect, useState } from "react";
 import RequestItem from "./RequestItem";
+import { getRequests } from "../services/basketService";
 
 
-// eslint-disable-next-line no-unused-vars
-const basket1 = {
-  "requests": [
-    {
-      "path": "/basket1/github?hello=world&laren=tired",
-      "headers": "Accept: */* \nAccept-Encoding: gzip, deflate \nConnection: close \nUser-Agent: HTTPie/3.2.4 \nX-City: La Crosse \nX-Country: US \nX-Forwarded-For: 184.97.26.131 \nX-Real-Ip: 184.97.26.131",
-      "method": "GET",
-      "query": "hello=world&laren=tired",
-      "body": "",
-      "date_time": 1737224774543
-    },
-    {
-      "path": "/basket1",
-      "headers":"Accept: */* \nAccept-Encoding: gzip, deflate \nConnection: close \nUser-Agent: HTTPie/3.2.4 \nX-City: La Crosse \nX-Country: US \nX-Forwarded-For: 184.97.26.131 \nX-Real-Ip: 184.97.26.131",
-      "method": "POST",
-      "query": "",
-      "body": {"id":13399049247,"kind":"comment_created"},
-      "date_time": 1737417679576
-    }
-  ]
-}
-
-function RequestList() {
+function RequestList({ currBasket }) {
   const [requests, setRequests] = useState([]);
+  console.log("Requests state:", requests);
 
   useEffect(() => {
-    // AJAX call to get request for this basket;
-    setRequests(basket1.requests); // change this to real response later
-  }, []);
+    fetchRequests();
+  }, [currBasket]);
+
+  const fetchRequests = async () => {
+    const data = await getRequests(currBasket);
+    setRequests(data);
+  }
 
   return (
     <>
