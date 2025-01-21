@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-export async function getBaskets() {
-  const response = await axios.get("/api/baskets");
-  console.log(response);
-}
+const baseURL = "/api/baskets";
 
-getBaskets();
+export async function getBaskets() {
+  const response = await axios.get(baseURL);
+  return response.data.baskets;
+}
