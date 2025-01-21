@@ -1,10 +1,10 @@
-import './Sidebar.css';
+//import './Sidebar.css';
 
 function Sidebar({baskets, onChange}) {
   return (
     <div className="sidebar">
       <p>Baskets:</p>
-    {baskets.map(basket => {
+      {baskets.map(basket => {
       return (
         <div key={basket}>
         <button onClick={() => onChange(basket)}>{basket}</button>

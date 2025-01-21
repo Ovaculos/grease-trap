@@ -1,22 +1,26 @@
-/* FONTS */
-/*.lacquer-regular {*/
-/*  font-family: "Lacquer", serif;*/
-/*  font-weight: 400;*/
-/*  font-style: normal;*/
-/*}*/
-
+body {
+  background-color: #4d4344;
+  color: #e99f6a;
+}
 .header {
   display: block;
   font-family: "Lacquer";
+  background-color: #e99f6a;
+  color: #4d4344;
+  border-radius: 10px;
+  text-wrap: nowrap;
+  margin-bottom: 30px;
 }
 
 .header a, .header h1 {
   display: inline-block;
-  padding: 10px;
+  font-size: 30px;
+  padding-left: 30px;
 }
 
-.header h1 {
-  font-size: 20px;
+.header a {
+  cursor: pointer;
+  padding-right: 110px;
 }
 
 .main {
