@@ -6,3 +6,8 @@ export async function getBaskets() {
   const response = await axios.get(baseURL);
   return response.data.baskets;
 }
+
+export async function createBasket(newBasket) {
+  const response = await axios.post(baseURL, newBasket);
+  return response.data;
+}

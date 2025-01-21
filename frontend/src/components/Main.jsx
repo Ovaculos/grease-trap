@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import './Main.css';
 import RequestList from './RequestList';
+import { createBasket } from '../services/basketService';
 
 
 function Main({ currBasket, baskets, setBaskets }) {
@@ -50,15 +51,24 @@ function Main({ currBasket, baskets, setBaskets }) {
     setBasketName(randomBasket);
   }
 
-  const addNewBasket = (e) => {
-    e.preventDefault();
+  const addNewBasket = async (e) => {
+    try {
+      e.preventDefault();
 
-    if (isValidBasketName(basketName)) {
-      // change to actually making a post request
-    
-      setBaskets(baskets.concat([basketName]));
-      setValidRandomURL();
+      if (isValidBasketName(basketName)) {
+        const newBasket = { name: basketName}
+
+        const data = await createBasket(newBasket);
+        console.log("In addNewBasket:", data);
+
+      
+        setBaskets(baskets.concat([data]));
+        setValidRandomURL();
+      }
+    } catch (error) {
+      console.error("Failed to create new basket:", error);
     }
+
   }
 
   if (!currBasket) {
