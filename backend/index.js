@@ -1,5 +1,7 @@
 import express from "express";
+import cors from "cors";
 const app = express();
+
 const host = "localhost";
 const port = "8080";
 
@@ -20,6 +22,9 @@ const parseBody = (req, res, next) => {
     express.raw({ type: '*/*' })(req, res, next);
   }
 };
+
+// laren testing to see if we need to allow for cors
+app.use(cors({ origin: 'http://localhost:5173' }));
 
 app.use(parseBody)
 
