@@ -1,16 +1,16 @@
 /* eslint-disable react/prop-types */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Main.css';
 import RequestList from './RequestList';
 
 
 function Main({ currBasket, baskets, setBaskets }) {
-  const [basketName, setNewBasket] = useState("");
-  
-  // create a random url generator 
-  //  => make sure it's not already in db
-  // => call with useEffect and set basketName to this state
+  const [basketName, setBasketName] = useState("");
 
+  useEffect(() => {
+    setValidRandomURL();
+  }, []);
+  
   const isValidBasketName = (name) => {
     if (baskets.includes(name)) {
       alert("That basket name is already present. Try another name!");
@@ -25,6 +25,31 @@ function Main({ currBasket, baskets, setBaskets }) {
     return true;
   }
 
+  const generateRandomURL = () => {
+    const VALID_CHARS = '0123456789abcdefghijklmnopqrstuvwxyz'
+    const NUM_OF_CHARS = 7;
+
+    let randomURL = "";
+
+    for (let idx = 0; idx <= NUM_OF_CHARS; idx += 1) {
+      const randomIdx = Math.floor(Math.random() * VALID_CHARS.length);
+      const randomChar = VALID_CHARS[randomIdx];
+
+      randomURL += randomChar;
+    }
+
+
+    return randomURL;
+  }
+
+  const setValidRandomURL = () => {
+    let randomBasket = generateRandomURL();
+    while (!isValidBasketName(randomBasket)) {
+      randomBasket = generateRandomURL();
+    }
+    setBasketName(randomBasket);
+  }
+
   const addNewBasket = (e) => {
     e.preventDefault();
 
@@ -32,6 +57,7 @@ function Main({ currBasket, baskets, setBaskets }) {
       // change to actually making a post request
     
       setBaskets(baskets.concat([basketName]));
+      setValidRandomURL();
     }
   }
 
@@ -42,7 +68,7 @@ function Main({ currBasket, baskets, setBaskets }) {
           <input type="text"
                  placeholder='Basket name'
                  value={basketName}
-                 onChange={(e) => setNewBasket(e.target.value)}
+                 onChange={(e) => setBasketName(e.target.value)}
                 //  pattern="^[\w\d\-_\.]{1,250}$"
            />
           <input type="submit" value="Create Basket" />
@@ -57,6 +83,26 @@ function Main({ currBasket, baskets, setBaskets }) {
     )
   }
 }
+
+
+const generateRandomURL = () => {
+  // 7 chars long
+  const VALID_CHARS = '0123456789abcdefghijklmnopqrstuvwxyz_-.'
+  const NUM_OF_CHARS = 7;
+
+  let randomURL = "";
+
+  for (let idx = 0; idx <= NUM_OF_CHARS; idx += 1) {
+    const randomIdx = Math.floor(Math.random() * VALID_CHARS.length);
+    const randomChar = VALID_CHARS[randomIdx];
+
+    randomURL += randomChar;
+  }
+
+  return randomURL;
+}
+
+generateRandomURL();
 
 
 export default Main;
