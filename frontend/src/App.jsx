@@ -1,47 +1,35 @@
 import { useEffect, useState } from 'react'
 import './index.css'
+
 import Header from './components/Header';
 import Main from './components/Main';
 import Sidebar from './components/Sidebar';
-
-const baskets = [
-    "basket1",
-    "Onomonopoeia",
-    "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-    "One Hundred Thousand Million Billion Trillion"
-  ]
-
-const basket1 = {
-    "requests": [
-      {
-        "headers": "Accept: */* \nAccept-Encoding: gzip, deflate \nConnection: close \nUser-Agent: HTTPie/3.2.4 \nX-City: La Crosse \nX-Country: US \nX-Forwarded-For: 184.97.26.131 \nX-Real-Ip: 184.97.26.131",
-        "method": "GET",
-        "query": "hello=world&laren=tired",
-        "body": "",
-        "date_time": 1737224774543
-      },
-      {
-        "headers":"Accept: */* \nAccept-Encoding: gzip, deflate \nConnection: close \nUser-Agent: HTTPie/3.2.4 \nX-City: La Crosse \nX-Country: US \nX-Forwarded-For: 184.97.26.131 \nX-Real-Ip: 184.97.26.131",
-        "method": "POST",
-        "query": "",
-        "body": {"id":13399049247,"kind":"comment_created"}
-      }
-    ]
-}
+import { getBaskets } from './services/basketService';
 
 function App() {
   const [currBasket, setCurrBasket] = useState("");
+  const [baskets, setBaskets] = useState([]);
+
+  useEffect(() => {
+    fetchBaskets();
+  }, []);
+
+  const fetchBaskets = async () => {
+    try {
+      let data = await getBaskets();
+      setBaskets(data);
+    } catch (error) {
+      console.error("Failed to fetch baskets:", error);
+    }
+  }
 
   const returnToHome = () => {
     setCurrBasket("");
   }; 
 
   const handleButtonClick = (basketName) => {
-    console.log("button clicked");
     setCurrBasket(basketName);
   }
-
-  console.log("App page curr basket:", currBasket);
 
   return (
     <>
@@ -50,9 +38,11 @@ function App() {
         returnToHome={returnToHome}
       />
       <div className="container">
-        <Main basket={currBasket}/>
+        <Main currBasket={currBasket}
+              baskets={baskets}
+              setBaskets={setBaskets}
+        />
         <Sidebar baskets={baskets} onChange={handleButtonClick}/>
-        {console.log(currBasket)}
       </div>
     </>
   )
