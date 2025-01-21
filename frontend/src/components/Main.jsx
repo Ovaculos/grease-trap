@@ -1,4 +1,6 @@
+/* eslint-disable react/prop-types */
 // import { useEffect, useState } from 'react'
+import { useState } from 'react';
 import './Main.css';
 import RequestList from './RequestList';
 
@@ -16,18 +18,36 @@ Two Main Pages:
 
 */
 
-
+const baskets = [
+  "basket1",
+  "basket2",
+  "basket3"
+];
 
 
 // eslint-disable-next-line react/prop-types
-function Main({ basket }) {
+function Main({ currBasket, baskets, setBaskets }) {
+  const [basketName, setNewBasket] = useState("");
+  // create a random url generator 
+  //  => make sure it's not already in db
+  // => call with useEffect and set basketName to this state
 
-  if (!basket) { //!basket
+  const addNewBasket = (e) => {
+    e.preventDefault();
+    // change to actually making a post request
+    
+    setBaskets(baskets.concat([basketName]));
+  }
+
+  if (!currBasket) { //!basket
     return (
       <div className='main'>
-        <form action="">
-          <input placeholder='Basket name' />
-          <button>Create Basket</button>
+        <form action="" onSubmit={(e) => addNewBasket(e)}>
+          <input placeholder='Basket name'
+                 value={basketName}
+                 onChange={(e) => setNewBasket(e.target.value)}
+           />
+          <input type="submit" value="Create Basket" />
         </form>
       </div>
     )

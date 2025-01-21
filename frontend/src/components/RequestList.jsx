@@ -3,15 +3,6 @@
 import { useEffect, useState } from "react";
 import RequestItem from "./RequestItem";
 
-// Request example:
-//     {
-//       "headers":"Accept: */* \nAccept-Encoding: gzip, deflate \nConnection: close \nUser-Agent: HTTPie/3.2.4 \nX-City: La Crosse \nX-Country: US \nX-Forwarded-For: 184.97.26.131 \nX-Real-Ip: 184.97.26.131",
-//       "method": "POST",
-//       "query": "",
-//       "body": {"id":13399049247,"kind":"comment_created"},
-//       "date_time": 1737224774549
-//     }
-
 
 // eslint-disable-next-line no-unused-vars
 const basket1 = {
@@ -45,7 +36,7 @@ function RequestList() {
 
   return (
     <>
-      <p>Orders being served at:</p>
+      <p>Orders being served at: [copy-able path here] </p>
       <p>Requests: {requests.length}</p>
       <table>
         <tbody>
@@ -55,27 +46,7 @@ function RequestList() {
         </tbody>
       </table>
     </>
-
-
   )
 }
 
 export default RequestList;
-
-
-// return (
-//   <table cellSpacing="0">
-//     <tbody>
-//       {todos.map((todo: Todo) => {
-//         return (
-//           <TodoItem 
-//             key={todo.id} 
-//             todo={todo}
-//             openFormModal={openFormModal}
-//             setCurrTodo={setCurrTodo}/>
-//         );
-//       })}
-//     </tbody>
-//   </table>
-// )
-// }
