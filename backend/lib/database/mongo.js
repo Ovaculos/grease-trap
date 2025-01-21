@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 const url = "mongodb://127.0.0.1:27017/grease-trap";
 mongoose.connect(url);
 
-const requestBodySchema = new mongoose.Schema({
+const bodySchema = new mongoose.Schema({
   basket_id: {
     type: String,
     required: true
@@ -12,14 +12,15 @@ const requestBodySchema = new mongoose.Schema({
     required: true
   },
   body: {
-    type: String
+    type: String,
+    required: true
   }
 });
 
-requestBodySchema.index({ request_id: 1 }, { unique: true });
+bodySchema.index({ basket_id: 1, request_id: 1 });
 
-const Body = mongoose.model("Body", requestBodySchema);
-Body.createIndexes();
+const Body = mongoose.model("Body", bodySchema);
+await Body.createIndexes();
 
 export async function createBody(basket_id, request_id, body) {
   try {
@@ -30,18 +31,16 @@ export async function createBody(basket_id, request_id, body) {
     });
 
     await newBody.save();
+    return { success: `Body was saved.` };
   } catch (e) {
-    return -1
+    return { error: `Body was not saved.` };
   }
 }
 
-export async function getBody(id) {
-  const bodyDoc = await Body.find({ request_id: id });
-  if (bodyDoc.length === 1) return bodyDoc[0].body
-  return ''
-}
-
 export async function getBodies(basket_id) {
-  const bodies = await Body.find({ basket_id });
-  return bodies;
+  try {
+    return await Body.find({ basket_id }).sort({ request_id: 1 });
+  } catch (e) {
+    return { error: `Could not get bodies from MongoDB` };
+  }
 }

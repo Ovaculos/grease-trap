@@ -25,12 +25,24 @@ app.use(parseBody)
 
 app.get("/api/baskets", async (req, res) => {
   const baskets = await getBaskets();
+  if (baskets.error) {
+    console.error(baskets.error);
+    res.status(503).send({ error: `Problem` });
+    return;
+  }
+
   res.status(200).send({ baskets });
 });
 
 app.get("/api/baskets/:name", async (req, res) => {
   const name = req.params.name;
   const baskets = await getBaskets();
+  if (baskets.error) {
+    console.error(baskets.error);
+    res.status(503).send({ error: `Problem` });
+    return;
+  }
+
   baskets.sort();
 
   if (!baskets.includes(name)) {
@@ -40,24 +52,38 @@ app.get("/api/baskets/:name", async (req, res) => {
 
   let requests = await getRequestsForBasket(name);
 
-  if (requests.length > 0) {
-    const mongoBodies = await getBodies(requests[0].basket_id);
+  if (requests.error) {
+    console.error(requests.error);
+    res.status(503).send({ error: `Problem` });
+    return;
+  }
 
-    requests = requests.map(req => {
-      let request_id = req.request_id;
-      let body = mongoBodies.find((body) => body.request_id === request_id) || '';
-      return {
-        header: req.header,
-        method: req.method,
-        query: req.query,
-        date_time: req.date_time,
-        path: req.path,
-        body: body.body,
+  if (requests.length > 0) {
+    const bodies = await getBodies(requests[0].basket_id);
+
+    if (bodies.error) {
+      console.error(bodies.error);
+      res.status(503).send({ error: `Problem` });
+      return;
+    }
+
+    let b = 0;
+
+    for (let r = 0; r < requests.length; r++) {
+      if (bodies[b] && requests[r].request_id === bodies[b].request_id) {
+        requests[r].body = bodies[b].body;
+        b++;
+      } else {
+        requests[r].body = ''
       }
+    }
+
+    requests = requests.map(({ header, method, query, date_time, path, body }) => {
+      return { header, method, query, date_time, path, body }
     });
   };
 
-  res.status(200).send({ requests });
+  res.status(200).send({ requests: requests.sort((a, b) => b.date_time - a.date_time) });
 });
 
 app.post("/api/baskets", async (req, res) => {
@@ -68,10 +94,11 @@ app.post("/api/baskets", async (req, res) => {
     return;
   }
 
-  const dbName = await createBasket(name);
+  const basketCreateResult = await createBasket(name);
 
-  if (dbName === -1) {
-    res.status(409).send({ error: `Name ${name} already exists.` });
+  if (basketCreateResult.error) {
+    console.error(basketCreateResult.error);
+    res.status(409).send({ error: `Basket ${name} already exists.` }); // Potential lie to front end for security (they can't know if db is down, but still get a useful message most of the time)
   } else {
     res.status(200).send(name);
   }
@@ -79,23 +106,36 @@ app.post("/api/baskets", async (req, res) => {
 
 app.all("/:name*", async (req, res) => {
   const name = req.params.name;
-  const id = await basketId(name)
-  if (!id) {
-    res.status(422).send({ error: `${name} isn't a basket.` })
+  const basketResult = await basketId(name);
+
+  if (basketResult.error) {
+    res.status(422).send({ error: `${name} is not a basket.` });
   } else {
+    const id = basketResult.id;
     const header = JSON.stringify(req.headers);
     const body = req.body.toString();
     const method = req.method;
     const path = req.path;
     const query = new URLSearchParams(req.query).toString();
 
-    const reqId = await createRequest(name, { header, method, path, query, basket_id: id })
-    if (body.length > 0) await createBody(id, reqId, body);
+    const pgResult = await createRequest(name, [header, method, path, query, id]);
+
+    if (pgResult.error) {
+      console.error(`Request wasn't saved`);
+      res.status(503).send({ error: `Problem` });
+      return;
+    }
+
+    const reqId = pgResult.id;
+
+    if (body.length > 0 && await createBody(id, reqId, body).error) {
+      console.error(`Body wasn't saved for reqId ${reqId}`);
+      res.status(503).send({ error: `Problem` });
+      return;
+    }
 
     res.status(200).send({ message: `Request was made` });
   }
-
-  res.send()
 })
 
 app.listen(port, host, () => {
