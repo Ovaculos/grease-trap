@@ -1,5 +1,13 @@
+/* FONTS */
+/*.lacquer-regular {*/
+/*  font-family: "Lacquer", serif;*/
+/*  font-weight: 400;*/
+/*  font-style: normal;*/
+/*}*/
+
 .header {
   display: block;
+  font-family: "Lacquer";
 }
 
 .header a, .header h1 {
