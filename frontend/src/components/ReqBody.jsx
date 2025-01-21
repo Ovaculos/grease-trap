@@ -1,13 +1,14 @@
+import { useState } from "react";
+
 /* eslint-disable react/prop-types */
 function ReqBody({ body }) {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div>
-      <p>Body</p>
-      <div>
-        <pre>
-          <code>{JSON.stringify(body)}</code>
-        </pre>
-        {/* <code>{JSON.stringify(body)}</code> */}
+      <button onClick={() => setIsOpen(!isOpen)}>Body</button>
+      <div className="info-dropdown">
+        {isOpen && <pre><code>{JSON.stringify(body)}</code></pre>}
       </div>
       
     </div>

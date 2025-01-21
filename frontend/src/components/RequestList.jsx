@@ -45,6 +45,7 @@ function RequestList() {
 
   return (
     <>
+      <p>Orders being served at:</p>
       <p>Requests: {requests.length}</p>
       <table>
         <tbody>

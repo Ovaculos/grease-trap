@@ -1,11 +1,15 @@
+import { useState } from "react";
+
 /* eslint-disable react/prop-types */
 function ReqQueryParams({ queryParams }) {
+  const [isOpen, setIsOpen] = useState(false);
+
 
   return (
     <div>
-      <p>Query Params</p>
+      <button onClick={() => setIsOpen(!isOpen)}>Query Params</button>
       <div className="info-dropdown">
-        {queryParams.split('&').map((query, idx) => {
+        {isOpen && queryParams.split('&').map((query, idx) => {
           return <p key={idx}>{query}</p>;
         })}
       </div>
