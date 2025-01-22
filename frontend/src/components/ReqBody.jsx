@@ -8,7 +8,7 @@ function ReqBody({ body }) {
     <div>
       <button onClick={() => setIsOpen(!isOpen)}>Body</button>
       <div className="info-dropdown">
-        {isOpen && <pre><code>{JSON.stringify(body)}</code></pre>}
+        {isOpen && <pre><code>{body}</code></pre>}
       </div>
       
     </div>
