@@ -6,6 +6,7 @@ import 'dotenv/config';
 export default defineConfig({
   plugins: [react()],
   server: {
+    port: process.env.VITE_frontPort,
     proxy: {
       "/api": {
         target: `http://${process.env.VITE_host}:${process.env.VITE_backPort}`,
