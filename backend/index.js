@@ -23,9 +23,7 @@ const parseBody = (req, res, next) => {
   }
 };
 
-// laren testing to see if we need to allow for cors
-app.use(cors({ origin: 'http://localhost:5173' }));
-
+app.use(cors());
 app.use(parseBody)
 
 app.get("/api/baskets", async (req, res) => {
@@ -118,9 +116,10 @@ app.all("/:name*", async (req, res) => {
   } else {
     const id = basketResult.id;
     const header = JSON.stringify(req.headers);
-    const body = req.body.toString();
+    let body = req.body.toString();
+    if (body === '[object Object]') body = '';
     const method = req.method;
-    const path = req.path;
+    const path = req.originalUrl;
     const query = new URLSearchParams(req.query).toString();
 
     const pgResult = await createRequest(name, [header, method, path, query, id]);
