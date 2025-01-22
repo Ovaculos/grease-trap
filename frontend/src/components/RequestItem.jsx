@@ -15,8 +15,8 @@ function RequestItem({ req }) {
       <td className="info">
         <ul>
           <li>[ {req.method.toUpperCase()} ]</li>
-          <li>{time}</li>
-          <li>{date}</li>
+          <li>&#x23F2; {time}</li>
+          <li>&#x270F; {date}</li>
         </ul>
       </td>
       <td className="data">

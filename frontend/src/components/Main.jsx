@@ -84,10 +84,18 @@ function Main({ currBasket, baskets, setBaskets }) {
                  placeholder='Basket name'
                  value={basketName}
                  onChange={(e) => setBasketName(e.target.value)}
-                //  pattern="^[\w\d\-_\.]{1,250}$"
            />
           <input className="button" type="submit" value="Create Basket" />
         </form>
+        <div>
+          <p>Here at GREASETRAP, we’re servin’ up piping-hot HTTP</p>
+          <p>request baskets fresh off the griddle! </p><br></br>
+          <p>Create yourself a basket to collect and check</p>
+          <p>out all your request orders—nice and crispy.</p><br></br>
+          <p>Toss your webhooks our way, and we’ll keep the sizzle comin’!</p>
+          <p>Debuggin’ never tasted so good. &#x1F35F;</p>
+          
+        </div>
       </div>
     )
   } else {

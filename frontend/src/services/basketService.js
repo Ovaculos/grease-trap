@@ -16,3 +16,7 @@ export async function getRequests(basketName) {
   const response = await axios.get(`${baseURL}/${basketName}`);
   return response.data.requests;
 }
+
+export async function deleteBasket(basketName) {
+  await axios.delete(`${baseURL}/${basketName}`, basketName);
+}

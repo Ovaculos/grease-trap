@@ -17,7 +17,6 @@ function RequestList({ currBasket }) {
 
   useEffect(() => {
     socket.on('newRequest', (data) => {
-      console.log('New request received:', data);
       setRequests((prevRequests) => [data, ...prevRequests]);
     });
 
