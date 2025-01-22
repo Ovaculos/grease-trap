@@ -23,9 +23,7 @@ const parseBody = (req, res, next) => {
   }
 };
 
-// laren testing to see if we need to allow for cors
-app.use(cors({ origin: 'http://localhost:5173' }));
-
+app.use(cors());
 app.use(parseBody)
 
 app.get("/api/baskets", async (req, res) => {
@@ -94,8 +92,8 @@ app.get("/api/baskets/:name", async (req, res) => {
 app.post("/api/baskets", async (req, res) => {
   const name = req.body.name;
 
-  if (!/^[\w\d\-_\.]{1,250}$/.test(name)) {
-    res.status(422).send({ error: `Name must match regex /^[\w\d\-_\.]{1,250}$/` });
+  if (!/^[\w\d\-_\.]{1,250}$/.test(name) || name === '.') {
+    res.status(422).send({ error: `Invalid basket name. Must match regex /^[\w\d\-_\.]{1,250}$/ and not be '.'` });
     return;
   }
 
@@ -118,9 +116,10 @@ app.all("/:name*", async (req, res) => {
   } else {
     const id = basketResult.id;
     const header = JSON.stringify(req.headers);
-    const body = req.body.toString();
+    let body = req.body.toString();
+    if (body === '[object Object]') body = '';
     const method = req.method;
-    const path = req.path;
+    const path = req.originalUrl;
     const query = new URLSearchParams(req.query).toString();
 
     const pgResult = await createRequest(name, [header, method, path, query, id]);
