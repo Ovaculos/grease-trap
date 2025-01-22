@@ -8,7 +8,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: `http://${process.env.host}:${process.env.port}`,
+        target: `http://${process.env.VITE_host}:${process.env.VITE_backPort}`,
         changeOrigin: true,
       }
     }

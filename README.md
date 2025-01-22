@@ -1,12 +1,18 @@
-You must add a `.env` file to the front and backend with the `host` and `port` set to the same values:
+You must add a `.env` file to backend with the `host`, `frontPort`, and `backPort` set to the same values. As the respective values on the frontend:
 
 ```
 host=localhost
-port=9999
-```
-
-You also must set a `mongoUrl` in the backend's `.env` that's set to the database you'd like to use for bodies:
-
-```
+frontPort=5173
+backPort=9999
 mongoUrl=mongodb://IP:PORT/DB_NAME
+```
+
+Frontend's `.env` looks different and follows this format.
+
+`frontPort` for both needs to be the same as the port that Vite will run the frontend on:
+
+```
+VITE_host=localhost
+VITE_frontPort=5173
+VITE_backPort=9999
 ```

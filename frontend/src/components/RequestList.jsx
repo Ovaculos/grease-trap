@@ -6,7 +6,8 @@ import RequestItem from "./RequestItem";
 import { getRequests } from "../services/basketService";
 import { io } from 'socket.io-client';
 
-const socket = io('http://localhost:8080');
+const socket = io(`http://${import.meta.env.VITE_host}:${import.meta.env.VITE_backPort}`);
+
 function RequestList({ currBasket }) {
   const [requests, setRequests] = useState([]);
 
