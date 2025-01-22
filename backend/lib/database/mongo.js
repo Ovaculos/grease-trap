@@ -45,3 +45,12 @@ export async function getBodies(basket_id) {
     return { error: `Could not get bodies from MongoDB` };
   }
 }
+
+export async function deleteBodies(basket_id) {
+  try {
+    await Body.deleteMany({ basket_id });
+    return { success: `Bodies deleted` }
+  } catch (e) {
+    return { error: `Could not delete bodies from MongoDB` };
+  }
+}

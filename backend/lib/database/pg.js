@@ -61,9 +61,19 @@ export const createBasket = async (name) => {
   }
 };
 
+export const deleteBasket = async (name) => {
+  try {
+    const deleteResult = await dbQuery("DELETE FROM baskets WHERE name = ($1) RETURNING id", name);
+    return { id: deleteResult.rows[0].id };
+  } catch (e) {
+    return { error: `Basket wasn't deleted.` };
+  }
+}
+
 const CONNECTION = {
   database: "grease-trap",
 };
+
 
 async function dbQuery(statement, ...parameters) {
   let client = new Client(CONNECTION);

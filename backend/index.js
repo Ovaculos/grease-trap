@@ -3,6 +3,7 @@ import http from 'http';
 import { Server } from 'socket.io';
 import 'dotenv/config';
 const app = express();
+
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
@@ -17,15 +18,18 @@ import {
   createBasket,
   getRequestsForBasket,
   basketId,
-  createRequest
+  createRequest,
+  deleteBasket
 } from "./lib/database/pg.js";
 
-import { createBody, getBodies } from "./lib/database/mongo.js"
+import { createBody, getBodies, deleteBodies } from "./lib/database/mongo.js";
+
+import { attachBodies, parseRequest } from "./lib/helpers/route-helpers.js"
+
 const parseBody = (req, res, next) => {
   if (/^\/api/.test(req.path)) {
     express.json()(req, res, next);
   } else {
-    console.log(2);
     express.raw({ type: '*/*' })(req, res, next);
   }
 };
@@ -33,9 +37,7 @@ const parseBody = (req, res, next) => {
 io.on('connection', (socket) => {
   console.log('A client connected:', socket.id);
 
-  socket.on('disconnect', () => {
-    console.log('Client disconnected:', socket.id);
-  });
+  socket.on('disconnect', () => console.log('Client disconnected:', socket.id));
 });
 
 app.use(parseBody)
@@ -60,9 +62,7 @@ app.get("/api/baskets/:name", async (req, res) => {
     return;
   }
 
-  baskets.sort();
-
-  if (!baskets.includes(name)) {
+  if (!baskets.sort().includes(name)) {
     res.status(404).send({ error: `${name} doesn't exist.` });
     return;
   }
@@ -84,24 +84,32 @@ app.get("/api/baskets/:name", async (req, res) => {
       return;
     }
 
-    let b = 0;
-
-    for (let r = 0; r < requests.length; r++) {
-      if (bodies[b] && requests[r].request_id === bodies[b].request_id) {
-        requests[r].body = bodies[b].body;
-        b++;
-      } else {
-        requests[r].body = ''
-      }
-    }
-
-    requests = requests.map(({ header, method, query, date_time, path, body }) => {
-      return { header, method, query, date_time, path, body }
-    });
+    requests = attachBodies(requests, bodies);
   };
 
-  res.status(200).send({ requests: requests.sort((a, b) => b.date_time - a.date_time) });
+  res.status(200).send({ requests });
 });
+
+app.delete("/api/baskets/:name", async (req, res) => {
+  const name = req.params.name;
+  const deleteResult = await deleteBasket(name);
+
+  if (deleteResult.error) {
+    console.error(deleteResult.error);
+    res.status(422).send({ error: `Basket doesn't exist `});
+    return;
+  }
+
+  const bodiesResult = await deleteBodies(deleteResult.id);
+
+  if (bodiesResult.error) {
+    console.error(bodiesResult.error);
+    res.status(422).send({ error: `Basket doesn't exist `});
+    return;
+  }
+
+  res.status(204).send();
+})
 
 app.post("/api/baskets", async (req, res) => {
   const name = req.body.name;
@@ -129,12 +137,7 @@ app.all("/:name*", async (req, res) => {
     res.status(422).send({ error: `${name} is not a basket.` });
   } else {
     const id = basketResult.id;
-    const header = JSON.stringify(req.headers);
-    let body = req.body.toString();
-    if (body === '[object Object]') body = '';
-    const method = req.method;
-    const path = req.originalUrl;
-    const query = new URLSearchParams(req.query).toString();
+    const { header, body, method, path, query } = parseRequest(req);
 
     const pgResult = await createRequest(name, [header, method, path, query, id]);
 
@@ -144,8 +147,8 @@ app.all("/:name*", async (req, res) => {
       return;
     }
 
-    const reqId = pgResult.id;
-    const date_time = pgResult.date_time;
+    const { reqId, date_time } = pgResult;
+
     if (body.length > 0 && await createBody(id, reqId, body).error) {
       console.error(`Body wasn't saved for reqId ${reqId}`);
       res.status(503).send({ error: `Problem` });
@@ -163,7 +166,7 @@ app.all("/:name*", async (req, res) => {
 
     res.status(200).send({ message: `Request was made` });
   }
-})
+});
 
 server.listen(process.env.backPort, () => {
   console.log(`App is listening on port ${process.env.backPort} of ${process.env.host}!`);
