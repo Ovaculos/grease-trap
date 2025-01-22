@@ -4,10 +4,12 @@ function Header({ basket, returnToHome}) {
     try {
       console.log("delete basket")
       // 1. warning
+      alert(`Are you sure you want to permanently destroy this basket and delete all collected requests?`);
+      // 3. set current basket to empty text to return home
 
       // 2. api call
-
-      // 3. set current basket to empty text to return home
+        // => remove basket from baskests thing
+      
       
     } catch (error) {
       console.error("Error deleting basket:", error);
