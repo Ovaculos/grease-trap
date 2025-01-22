@@ -17,10 +17,16 @@ function RequestList({ currBasket }) {
     const data = await getRequests(currBasket);
     setRequests(data);
   }
+  
+  const copyURL = () => {
+    console.log("pretending to copy url");
+  }
 
   return (
     <>
-      <p>Orders being served at: [copy-able path here] </p>
+      <p>Orders being served at:</p>
+      <p>{`https://OURURL/${currBasket}`}</p>
+      <button onClick={() => copyURL()}>COPY URL</button>
       <p>Requests: {requests.length}</p>
       <hr/>
       <table>
