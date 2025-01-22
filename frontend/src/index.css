@@ -37,7 +37,7 @@ body {
 }
 
 .sidebar {
-  width: 200px;
+  min-width: 200px;
   text-align: center;
   border: 5px double #a50e07;
   margin-right: 20px;
@@ -72,6 +72,26 @@ body {
   font-family: 'Lacquer';
 }
 
-button {
+button, .button {
   cursor: pointer;
+}
+
+table {
+  display: flex;
+}
+
+.info, .data {
+  border: 1px solid;
+  text-align: left;
+  padding-right: 30px;
+}
+
+.info {
+  min-width: 150px;
+}
+
+.data {
+  flex: 1;
+  min-width: 200px;
+  width: 1000px;
 }

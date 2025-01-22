@@ -8,6 +8,7 @@ Two Main Pages:
 =======
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
+
 import { useEffect, useState } from 'react';
 import './Main.css';
 import RequestList from './RequestList';
@@ -86,7 +87,7 @@ function Main({ currBasket, baskets, setBaskets }) {
                  onChange={(e) => setBasketName(e.target.value)}
                 //  pattern="^[\w\d\-_\.]{1,250}$"
            />
-          <input type="submit" value="Create Basket" />
+          <input className="button" type="submit" value="Create Basket" />
         </form>
       </div>
     )

@@ -22,6 +22,7 @@ function RequestList({ currBasket }) {
     <>
       <p>Orders being served at: [copy-able path here] </p>
       <p>Requests: {requests.length}</p>
+      <hr/>
       <table>
         <tbody>
           {requests.map((req, idx) => {

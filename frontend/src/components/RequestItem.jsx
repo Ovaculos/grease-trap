@@ -17,7 +17,6 @@ function RequestItem({ req }) {
           <li>{time}</li>
           <li>{date}</li>
         </ul>
-        
       </td>
       <td className="data">
         <ul>
@@ -28,7 +27,6 @@ function RequestItem({ req }) {
         </ul>
       </td>
     </tr>
-
   )
 }
 
