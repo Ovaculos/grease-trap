@@ -4,7 +4,7 @@ import './index.css'
 import Header from './components/Header';
 import Main from './components/Main';
 import Sidebar from './components/Sidebar';
-import { getBaskets } from './services/basketService';
+import { deleteBasket, getBaskets } from './services/basketService';
 
 function App() {
   const [currBasket, setCurrBasket] = useState("");
@@ -31,11 +31,36 @@ function App() {
     setCurrBasket(basketName);
   }
 
+  const destroyBasket = async () => {
+    try {
+      alert(`Are you sure you want to permanently destroy this basket and delete all collected requests?`);
+      const basketToDelete = currBasket;
+      const idxOfBasketToDelete = baskets.findIndex(b => b === basketToDelete);
+      
+      setCurrBasket("");
+
+      // const deleted = await deleteBasket();
+
+      // if (!deleted) {
+      //   alert("Sorry! That basket was unable to be destroyed");
+      // }
+
+      const newBaskets = baskets.slice();
+      newBaskets.splice(idxOfBasketToDelete, 1);
+
+      setBaskets(newBaskets);
+      
+    } catch (error) {
+      console.error("Error deleting basket:", error);
+    }
+  }
+
   return (
     <>
       <Header 
         basket={currBasket}
         returnToHome={returnToHome}
+        destroyBasket={destroyBasket}
       />
       <div className="container">
         <Main currBasket={currBasket}
