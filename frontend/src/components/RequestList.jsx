@@ -17,15 +17,17 @@ function RequestList({ currBasket }) {
     const data = await getRequests(currBasket);
     setRequests(data);
   }
+
+  const basketURL = `https://OURURL/${currBasket}`;
   
-  const copyURL = () => {
-    console.log("pretending to copy url");
+  const copyURL = async () => {
+    await navigator.clipboard.writeText(basketURL);
   }
 
   return (
     <>
       <p>Orders being served at:</p>
-      <p>{`https://OURURL/${currBasket}`}</p>
+      <pre><code>{basketURL}</code></pre>
       <button onClick={() => copyURL()}>COPY URL</button>
       <p>Requests: {requests.length}</p>
       <hr/>
