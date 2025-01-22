@@ -5,7 +5,8 @@ import ReqHeaders from "./ReqHeaders";
 import ReqQueryParams from "./ReqQueryParams";
 
 function RequestItem({ req }) {
-  const dateObj = new Date(req.date_time);
+  const currDateTime = req.date_time * 1000;
+  const dateObj = new Date(currDateTime);
   const time = dateObj.toLocaleTimeString();
   const date = dateObj.toLocaleDateString();
 
@@ -17,7 +18,6 @@ function RequestItem({ req }) {
           <li>{time}</li>
           <li>{date}</li>
         </ul>
-        
       </td>
       <td className="data">
         <ul>
@@ -28,7 +28,6 @@ function RequestItem({ req }) {
         </ul>
       </td>
     </tr>
-
   )
 }
 

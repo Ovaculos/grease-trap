@@ -1,6 +1,8 @@
 import express from "express";
 import http from 'http';
 import { Server } from 'socket.io';
+import cors from "cors";
+import 'dotenv/config';
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
@@ -10,9 +12,6 @@ const io = new Server(server, {
     allowedHeaders: ['Content-Type'],
   }
 });
-
-const host = "localhost";
-const port = "8080";
 
 import {
   getBaskets,
@@ -108,8 +107,8 @@ app.get("/api/baskets/:name", async (req, res) => {
 app.post("/api/baskets", async (req, res) => {
   const name = req.body.name;
 
-  if (!/^[\w\d\-_\.]{1,250}$/.test(name) || name === '.') {
-    res.status(422).send({ error: `Invalid basket name. Must match regex /^[\w\d\-_\.]{1,250}$/ and not be '.'` });
+  if (!/^[\w\d\-_\.]{1,250}$/.test(name) || name === '.' || name === '..') {
+    res.status(422).send({ error: `Invalid basket name. Must match regex /^[\w\d\-_\.]{1,250}$/ and not be '.' or '..'` });
     return;
   }
 
@@ -167,6 +166,6 @@ app.all("/:name*", async (req, res) => {
   }
 })
 
-server.listen(port, () => {
-  console.log(`App is listening on port ${port} of ${host}!`);
+  server.listen(process.env.port, process.env.host, () => {
+  console.log(`App is listening on port ${process.env.port} of ${process.env.host}!`);
 });

@@ -2,11 +2,11 @@ body {
   background-color: #453c3d;
   color: #e99f6a;
   font-family: 'Lacquer';
+  min-width: 760px;
 }
 
 .header {
   display: block;
-  /*font-family: "Lacquer";*/
   background-color: #e99f6a;
   color: #453c3d;
   border-radius: 10px;
@@ -37,7 +37,8 @@ body {
 }
 
 .sidebar {
-  width: 200px;
+  min-width: 200px;
+  height: 500px;
   text-align: center;
   border: 5px double #a50e07;
   margin-right: 20px;
@@ -46,10 +47,9 @@ body {
 }
 
 .sidebar button {
-  font-size: 16px;
+  font-size: 24px;
   margin-bottom: 8px;
   padding: 8px;
-  font-family: 'Lacquer';
   width: 120px;
   word-wrap: break-word;
 }
@@ -61,17 +61,63 @@ body {
   border-radius: 10px;
 }
 
+.main p {
+  text-align: left;
+  text-wrap: nowrap;
+  padding-left: 10px;
+}
+
 .form {
   padding-top: 20px;
 }
 
-.form input, .form button {
-  font-size: 16px;
+.form input {
+  font-size: 24px;
   margin-bottom: 8px;
   padding: 8px;
-  font-family: 'Lacquer';
+  font-family: "VT323";
 }
 
-button {
+button, .button {
+  font-family: "VT323";
   cursor: pointer;
+  background-color: #e99f6a;
+  color: #453c3d;
+}
+
+ul button {
+  color: #453c3d;
+  font-size: 20px;
+  margin: 10px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.info-dropdown {
+  border: 1px solid;
+  margin: 10px;
+}
+
+table {
+  font-size: 24px;
+  font-family: "VT323";
+  display: flex;
+}
+
+.info, .data {
+  border: 1px solid;
+  text-align: left;
+  padding-right: 30px;
+}
+
+.info {
+  min-width: 150px;
+}
+
+.data {
+  flex: 1;
+  min-width: 200px;
+  width: 1000px;
 }

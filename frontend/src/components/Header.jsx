@@ -1,5 +1,3 @@
-//import './Header.css';
-
 // eslint-disable-next-line react/prop-types
 function Header({ basket, returnToHome}) {
   return (
