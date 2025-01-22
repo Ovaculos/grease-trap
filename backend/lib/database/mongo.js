@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-const url = "mongodb://127.0.0.1:27017/grease-trap";
+import 'dotenv/config';
+const url = process.env.mongoUrl
 mongoose.connect(url);
 
 const bodySchema = new mongoose.Schema({

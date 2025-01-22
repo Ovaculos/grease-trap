@@ -1,9 +1,7 @@
 import express from "express";
 import cors from "cors";
+import 'dotenv/config';
 const app = express();
-
-const host = "localhost";
-const port = "8080";
 
 import {
   getBaskets,
@@ -142,6 +140,6 @@ app.all("/:name*", async (req, res) => {
   }
 })
 
-app.listen(port, host, () => {
-  console.log(`App is listening on port ${port} of ${host}!`);
+app.listen(process.env.port, process.env.host, () => {
+  console.log(`App is listening on port ${process.env.port} of ${process.env.host}!`);
 });
