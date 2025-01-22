@@ -1,5 +1,3 @@
-//import './Sidebar.css';
-
 function Sidebar({baskets, onChange}) {
   return (
     <div className="sidebar">

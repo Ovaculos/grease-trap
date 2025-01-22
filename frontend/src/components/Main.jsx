@@ -10,7 +10,6 @@ Two Main Pages:
 /* eslint-disable react/prop-types */
 
 import { useEffect, useState } from 'react';
-import './Main.css';
 import RequestList from './RequestList';
 import { createBasket } from '../services/basketService';
 
