@@ -89,11 +89,12 @@ function Main({ currBasket, baskets, setBaskets }) {
         </form>
         <div>
           <p>Here at GREASETRAP, we’re servin’ up piping-hot HTTP</p>
-          <p>request baskets fresh off the griddle! Create yourself</p>
-          <p>a basket to collect and check out all your orders—nice and crispy.</p>
+          <p>request baskets fresh off the griddle! </p><br></br>
+          <p>Create yourself a basket to collect and check</p>
+          <p>out all your request orders—nice and crispy.</p><br></br>
           <p>Toss your webhooks our way, and we’ll keep the sizzle comin’!</p>
           <p>Debuggin’ never tasted so good. &#x1F35F;</p>
-          <p></p>
+          
         </div>
       </div>
     )
