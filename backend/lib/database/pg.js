@@ -35,8 +35,8 @@ export const getRequestsForBasket = async (name) => {
 
 export const createRequest = async (name, request) => {
   try {
-    const result = await dbQuery("INSERT INTO requests (header, method, path, query, basket_id) VALUES ($1, $2, $3, $4, $5) RETURNING id", ...request);
-    return { id: result.rows[0].id };
+    const result = await dbQuery("INSERT INTO requests (header, method, path, query, basket_id) VALUES ($1, $2, $3, $4, $5) RETURNING id, date_time", ...request);
+    return { id: result.rows[0].id, date_time: result.rows[0].date_time };
   } catch (e) {
     return { error: `Could not insert request.` };
   }

@@ -1,6 +1,15 @@
 import express from "express";
-import cors from "cors";
+import http from 'http';
+import { Server } from 'socket.io';
 const app = express();
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: 'http://localhost:5173', // frontend URL
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type'],
+  }
+});
 
 const host = "localhost";
 const port = "8080";
@@ -14,16 +23,23 @@ import {
 } from "./lib/database/pg.js";
 
 import { createBody, getBodies } from "./lib/database/mongo.js"
-
 const parseBody = (req, res, next) => {
   if (/^\/api/.test(req.path)) {
     express.json()(req, res, next);
   } else {
+    console.log(2);
     express.raw({ type: '*/*' })(req, res, next);
   }
 };
 
-app.use(cors());
+io.on('connection', (socket) => {
+  console.log('A client connected:', socket.id);
+
+  socket.on('disconnect', () => {
+    console.log('Client disconnected:', socket.id);
+  });
+});
+
 app.use(parseBody)
 
 app.get("/api/baskets", async (req, res) => {
@@ -131,17 +147,26 @@ app.all("/:name*", async (req, res) => {
     }
 
     const reqId = pgResult.id;
-
+    const date_time = pgResult.date_time;
     if (body.length > 0 && await createBody(id, reqId, body).error) {
       console.error(`Body wasn't saved for reqId ${reqId}`);
       res.status(503).send({ error: `Problem` });
       return;
     }
 
+    io.emit('newRequest', {
+        header,
+        method,
+        path,
+        query,
+        body,
+        date_time
+    });
+
     res.status(200).send({ message: `Request was made` });
   }
 })
 
-app.listen(port, host, () => {
+server.listen(port, () => {
   console.log(`App is listening on port ${port} of ${host}!`);
 });
