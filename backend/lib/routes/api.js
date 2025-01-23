@@ -10,8 +10,7 @@ import {
 
 import { getBodies, deleteBodies } from "../database/mongo.js";
 
-import { attachBodies } from "../helpers/route-helpers.js"
-
+import { filterRequest, attachBodies } from "../helpers/route-helpers.js"
 
 router.get("/", async (req, res) => {
   const baskets = await getBaskets();
@@ -55,7 +54,9 @@ router.get("/:name", async (req, res) => {
       return;
     }
 
-    requests = attachBodies(requests, bodies);
+    attachBodies(requests, bodies);
+    requests = requests.map(filterRequest);
+    requests.sort((a, b) => b.date_time - a.date_time);
   };
 
   res.status(200).send({ requests });

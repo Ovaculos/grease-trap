@@ -30,11 +30,11 @@ const parseBody = (req, res, next) => {
   }
 };
 
-io.on('connection', (socket) => {
-  console.log('A client connected:', socket.id);
+// io.on('connection', (socket) => {
+//   console.log('A client connected:', socket.id);
 
-  socket.on('disconnect', () => console.log('Client disconnected:', socket.id));
-});
+//   socket.on('disconnect', () => console.log('Client disconnected:', socket.id));
+// });
 
 app.use(parseBody);
 app.use("/api/baskets", apiRoutes);
@@ -59,10 +59,13 @@ app.all("/:name*", async (req, res) => {
 
     const { reqId, date_time } = pgResult;
 
-    if (body.length > 0 && await createBody(id, reqId, body).error) {
-      console.error(`Body wasn't saved for reqId ${reqId}`);
-      res.status(503).send({ error: `Problem` });
-      return;
+    if (body.length > 0) {
+      const bodyResult = await createBody(id, reqId, body)
+      if (bodyResult.error) {
+        console.error(`Body wasn't saved for reqId ${reqId}`);
+        res.status(503).send({ error: `Problem` });
+        return;
+      }
     }
 
     io.emit('newRequest', {

@@ -1,4 +1,4 @@
-const filterRequest = (req) => {
+export const filterRequest = (req) => {
   return {
     header: req.header,
     method: req.method,
@@ -20,8 +20,6 @@ export const attachBodies = (requests, bodies) => {
       requests[r].body = ''
     }
   }
-
-  return requests.map(filterRequest).sort((a, b) => b.date_time - a.date_time);
 }
 
 export const parseRequest = (req) => {

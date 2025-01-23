@@ -48,6 +48,7 @@ export async function getBodies(basket_id) {
 
 export async function deleteBodies(basket_id) {
   try {
+    console.log(`deleting bodies`)
     await Body.deleteMany({ basket_id });
     return { success: `Bodies deleted` }
   } catch (e) {
