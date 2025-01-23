@@ -10,21 +10,6 @@ function RequestItem({ req }) {
   const time = dateObj.toLocaleTimeString();
   const date = dateObj.toLocaleDateString();
 
-  // const addEmojiToRequestType = () => {
-  //   let method;
-  //   if (req.method.toUpperCase() === "GET") {
-  //     method = `&#x1F35F;`;
-  //   } else if (req.method.toUpperCase() === "POST") {
-  //     method = `&#x1F354;`;
-  //   } else if (req.method.toUpperCase() === "PUT") {
-  //     method = "&#x1F366;";
-  //   } else {
-  //     method = `🥤`;
-  //   }
-
-  //   return method;
-  // }
-
   return (
     <tr className="request-item">
       <td className="info">
