@@ -89,7 +89,7 @@ button:hover, .button:hover {
   background-color: #a499b3;
 }
 
-ul button {
+ul button,  {
   color: #453c3d;
   font-size: 20px;
   margin: 10px;
@@ -99,15 +99,39 @@ ul {
   list-style-type: none;
 }
 
-pre {
+pre, code {
   white-space: pre-wrap;
   font-family: "VT323";
 }
 
+.path {
+  color: #db324d;
+}
+
 .info-dropdown {
   border: 1px solid;
-  margin: 10px;
+  border-radius: 20px;
+  padding: 12px;
   text-wrap: word-wrap;
+}
+
+button.headers {
+  background-color: #e9e07c;
+}
+
+button.queries {
+  background-color: #00a878;
+}
+.info-dropdown.headers {
+  color: #e9e07c;
+}
+
+.info-dropdown.queries {
+  color: #00a878;
+}
+
+.hidden {
+  display: none;
 }
 
 table {
@@ -131,4 +155,5 @@ table {
   min-width: 200px;
   width: 1000px;
   border: 1px solid;
+  border-radius: 20px;
 }

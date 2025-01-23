@@ -7,9 +7,9 @@ function ReqQueryParams({ queryParams }) {
 
   return (
     <div>
-      <button onClick={() => setIsOpen(!isOpen)}>Query Params</button>
-      <div className="info-dropdown">
-        {isOpen && queryParams.split('&').map((query, idx) => {
+      <button className="queries" onClick={() => setIsOpen(!isOpen)}>Query Params</button>
+      <div className={isOpen ? "info-dropdown queries" : "hidden"}>
+        {queryParams.split('&').map((query, idx) => {
           return <p key={idx}>{query}</p>;
         })}
       </div>

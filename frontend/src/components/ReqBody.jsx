@@ -6,9 +6,9 @@ function ReqBody({ body }) {
 
   return (
     <div>
-      <button onClick={() => setIsOpen(!isOpen)}>Body</button>
-      <div className="info-dropdown">
-        {isOpen && <pre><code>{body}</code></pre>}
+      <button className="body" onClick={() => setIsOpen(!isOpen)}>Body</button>
+      <div className={isOpen ? "info-dropdown body" : "hidden"}>
+        <pre><code>{body}</code></pre>
       </div>
       
     </div>

@@ -21,7 +21,7 @@ function RequestItem({ req }) {
       </td>
       <td className="data">
         <ul>
-          <li>{req.path}</li>
+          <li className="path">{req.path}</li>
           <ReqHeaders headers={req.header}/>
           {req.query ? <ReqQueryParams queryParams={req.query} /> : ""}
           {req.body ? <ReqBody body={req.body} /> : ""}
