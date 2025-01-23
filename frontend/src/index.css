@@ -121,6 +121,8 @@ pre, code {
   border-radius: 20px;
   padding: 12px;
   text-wrap: word-wrap;
+  overflow-wrap: break-word;
+  max-width: 850px;
 }
 
 button.headers {
@@ -136,6 +138,10 @@ button.queries {
 
 .info-dropdown.queries {
   color: #00a878;
+}
+
+.info-dropdown.body {
+
 }
 
 .hidden {

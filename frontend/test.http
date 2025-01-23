@@ -1,0 +1,19 @@
+GET http://localhost:8081/BasketA
+
+###
+
+POST http://localhost:8081/BasketA
+Content-Type: application/json
+
+{
+  "hello": "world",
+  "ok": "i suppose",
+  "well": "oh well"
+}
+
+###
+
+POST http://localhost:8081/BasketA
+Content-Type: text/plain
+
+"abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz"
