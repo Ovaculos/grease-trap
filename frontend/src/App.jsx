@@ -33,8 +33,8 @@ function App() {
 
   const destroyBasket = async () => {
     try {
-      let confirm = confirm(`Are you sure you want to permanently destroy this basket and delete all collected requests?`);
-      if (confirm) {
+      let userConfirmation = confirm(`Are you sure you want to permanently destroy this basket and delete all collected requests?`);
+      if (userConfirmation) {
         const basketToDelete = currBasket;
         const idxOfBasketToDelete = baskets.findIndex(b => b === basketToDelete);
         

@@ -20,7 +20,7 @@ body {
 .header a, .header h1, .header button {
   display: inline-block;
   font-size: 30px;
-  padding-left: 30px;
+  margin-left: 30px;
 }
 
 .header button {
@@ -28,6 +28,8 @@ body {
 }
 
 .header a {
+  font-family: "VT323";
+  font-size: 42px;
   cursor: pointer;
   padding-right: 100px;
 }
@@ -175,4 +177,28 @@ table {
   width: 1000px;
   border: 1px solid;
   border-radius: 20px;
+}
+
+.path-link-container {
+  display: block;
+  font-family: "VT323";
+  width: auto;
+  text-align: left;
+  text-wrap: nowrap;
+}
+
+.path-link-container p,
+.path-link-container pre,
+.path-link-container button {
+  display: inline-block;
+  margin: 8px;
+}
+
+.path-link-container code {
+  color:#453c3d;
+  background-color: rgb(218, 216, 216);
+  padding-left: 5px;
+  padding-right: 5px;
+  border-width: 100px;
+  border-color: #2a2526;
 }

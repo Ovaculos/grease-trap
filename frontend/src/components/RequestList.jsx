@@ -38,9 +38,12 @@ function RequestList({ currBasket }) {
 
   return (
     <>
-      <p>Orders being served at:</p>
-      <pre><code>{basketURL}</code></pre>
-      <button onClick={() => copyURL()}>COPY URL</button>
+      <div className="path-link-container">
+        <p>Orders being served at:</p>
+        <pre><code>{basketURL}</code></pre>
+        <button onClick={() => copyURL()}>COPY URL</button>
+      </div>
+
       <p>Requests: {requests.length}</p>
       <hr/>
       <table>
