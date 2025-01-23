@@ -74,7 +74,8 @@ app.all("/:name*", async (req, res) => {
         path,
         query,
         body,
-        date_time
+        date_time,
+        name
     });
 
     res.status(200).send({ message: `Request was made` });

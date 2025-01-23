@@ -17,7 +17,8 @@ function RequestList({ currBasket }) {
 
   useEffect(() => {
     socket.on('newRequest', (data) => {
-      setRequests((prevRequests) => [data, ...prevRequests]);
+      console.log(currBasket);
+      if (data.name === document.querySelector('h1').textContent) setRequests((prevRequests) => [data, ...prevRequests]);
     });
 
     return () => {
@@ -31,7 +32,7 @@ function RequestList({ currBasket }) {
   }
 
   const basketURL = `https://OURURL/${currBasket}`;
-  
+
   const copyURL = async () => {
     await navigator.clipboard.writeText(basketURL);
   }
