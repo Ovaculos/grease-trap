@@ -17,15 +17,23 @@ body {
   margin-top: 10px;
 }
 
-.header a, .header h1 {
+.header a, .header h1, .header button {
   display: inline-block;
   font-size: 30px;
   padding-left: 30px;
 }
 
+.header button {
+  margin-left: 150px;
+}
+
 .header a {
   cursor: pointer;
   padding-right: 100px;
+}
+
+.header a:hover {
+  color: #DB324D
 }
 
 .container {
