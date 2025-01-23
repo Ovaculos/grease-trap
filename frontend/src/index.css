@@ -93,7 +93,7 @@ button, .button {
   color: #453c3d;
 }
 
-button:hover, .button:hover {
+button:hover, .button:hover, button.headers:hover, button.queries:hover, button.body:hover {
   background-color: #a499b3;
 }
 
@@ -122,26 +122,31 @@ pre, code {
   padding: 12px;
   text-wrap: word-wrap;
   overflow-wrap: break-word;
-  max-width: 850px;
+  max-width: 600px;
 }
 
 button.headers {
-  background-color: #e9e07c;
+  background-color: #90f1ef;
 }
 
 button.queries {
+  background-color: #e9e07c;
+}
+
+button.body {
   background-color: #00a878;
 }
+
 .info-dropdown.headers {
-  color: #e9e07c;
+  color: #90f1ef;
 }
 
 .info-dropdown.queries {
-  color: #00a878;
+  color: #e9e07c;
 }
 
 .info-dropdown.body {
-
+  color: #00a878;
 }
 
 .hidden {
