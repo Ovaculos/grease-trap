@@ -18,5 +18,6 @@ export async function getRequests(basketName) {
 }
 
 export async function deleteBasket(basketName) {
-  await axios.delete(`${baseURL}/${basketName}`, basketName);
+  const response = await axios.delete(`${baseURL}/${basketName}`);
+  return response.status === 204;
 }

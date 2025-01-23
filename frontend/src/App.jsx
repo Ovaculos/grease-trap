@@ -39,11 +39,11 @@ function App() {
       
       setCurrBasket("");
 
-      // const deleted = await deleteBasket();
+      const deleted = await deleteBasket(basketToDelete);
 
-      // if (!deleted) {
-      //   alert("Sorry! That basket was unable to be destroyed");
-      // }
+      if (!deleted) {
+        alert("Sorry! That basket was unable to be destroyed");
+      }
 
       const newBaskets = baskets.slice();
       newBaskets.splice(idxOfBasketToDelete, 1);
