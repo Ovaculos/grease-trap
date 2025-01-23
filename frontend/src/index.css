@@ -122,7 +122,7 @@ pre, code {
   padding: 12px;
   text-wrap: word-wrap;
   overflow-wrap: break-word;
-  max-width: 600px;
+  width: 600px;
 }
 
 button.headers {
