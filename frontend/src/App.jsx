@@ -33,22 +33,27 @@ function App() {
 
   const destroyBasket = async () => {
     try {
-      alert(`Are you sure you want to permanently destroy this basket and delete all collected requests?`);
-      const basketToDelete = currBasket;
-      const idxOfBasketToDelete = baskets.findIndex(b => b === basketToDelete);
-      
-      setCurrBasket("");
-
-      const deleted = await deleteBasket(basketToDelete);
-
-      if (!deleted) {
-        alert("Sorry! That basket was unable to be destroyed");
+      let confirm = confirm(`Are you sure you want to permanently destroy this basket and delete all collected requests?`);
+      if (confirm) {
+        const basketToDelete = currBasket;
+        const idxOfBasketToDelete = baskets.findIndex(b => b === basketToDelete);
+        
+        setCurrBasket("");
+  
+        const deleted = await deleteBasket(basketToDelete);
+  
+        if (!deleted) {
+          alert("Sorry! That basket was unable to be destroyed");
+        }
+  
+        const newBaskets = baskets.slice();
+        newBaskets.splice(idxOfBasketToDelete, 1);
+  
+        setBaskets(newBaskets);
+      } else {
+        return;
       }
-
-      const newBaskets = baskets.slice();
-      newBaskets.splice(idxOfBasketToDelete, 1);
-
-      setBaskets(newBaskets);
+      
       
     } catch (error) {
       console.error("Error deleting basket:", error);
