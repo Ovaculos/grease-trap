@@ -72,7 +72,7 @@ body {
 }
 
 .main p {
-  text-align: left;
+  text-align: center;
   text-wrap: nowrap;
   padding-left: 10px;
 }
@@ -107,6 +107,10 @@ ul button {
 
 ul {
   list-style-type: none;
+}
+
+li {
+  text-wrap: nowrap;
 }
 
 pre, code {
