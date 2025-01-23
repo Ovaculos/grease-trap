@@ -2,6 +2,7 @@ import express from "express";
 import http from 'http';
 import { Server } from 'socket.io';
 import 'dotenv/config';
+import apiRoutes from "./lib/routes/api.js";
 const app = express();
 
 const server = http.createServer(app);
@@ -14,17 +15,12 @@ const io = new Server(server, {
 });
 
 import {
-  getBaskets,
-  createBasket,
-  getRequestsForBasket,
   basketId,
   createRequest,
-  deleteBasket
 } from "./lib/database/pg.js";
 
-import { createBody, getBodies, deleteBodies } from "./lib/database/mongo.js";
-
-import { attachBodies, parseRequest } from "./lib/helpers/route-helpers.js"
+import { createBody } from "./lib/database/mongo.js";
+import { parseRequest } from "./lib/helpers/route-helpers.js"
 
 const parseBody = (req, res, next) => {
   if (/^\/api/.test(req.path)) {
@@ -40,94 +36,8 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => console.log('Client disconnected:', socket.id));
 });
 
-app.use(parseBody)
-
-app.get("/api/baskets", async (req, res) => {
-  const baskets = await getBaskets();
-  if (baskets.error) {
-    console.error(baskets.error);
-    res.status(503).send({ error: `Problem` });
-    return;
-  }
-
-  res.status(200).send({ baskets });
-});
-
-app.get("/api/baskets/:name", async (req, res) => {
-  const name = req.params.name;
-  const baskets = await getBaskets();
-  if (baskets.error) {
-    console.error(baskets.error);
-    res.status(503).send({ error: `Problem` });
-    return;
-  }
-
-  if (!baskets.sort().includes(name)) {
-    res.status(404).send({ error: `${name} doesn't exist.` });
-    return;
-  }
-
-  let requests = await getRequestsForBasket(name);
-
-  if (requests.error) {
-    console.error(requests.error);
-    res.status(503).send({ error: `Problem` });
-    return;
-  }
-
-  if (requests.length > 0) {
-    const bodies = await getBodies(requests[0].basket_id);
-
-    if (bodies.error) {
-      console.error(bodies.error);
-      res.status(503).send({ error: `Problem` });
-      return;
-    }
-
-    requests = attachBodies(requests, bodies);
-  };
-
-  res.status(200).send({ requests });
-});
-
-app.delete("/api/baskets/:name", async (req, res) => {
-  const name = req.params.name;
-  const deleteResult = await deleteBasket(name);
-
-  if (deleteResult.error) {
-    console.error(deleteResult.error);
-    res.status(422).send({ error: `Basket doesn't exist `});
-    return;
-  }
-
-  const bodiesResult = await deleteBodies(deleteResult.id);
-
-  if (bodiesResult.error) {
-    console.error(bodiesResult.error);
-    res.status(422).send({ error: `Basket doesn't exist `});
-    return;
-  }
-
-  res.status(204).send();
-})
-
-app.post("/api/baskets", async (req, res) => {
-  const name = req.body.name;
-
-  if (!/^[\w\d\-_\.]{1,250}$/.test(name) || name === '.' || name === '..') {
-    res.status(422).send({ error: `Invalid basket name. Must match regex /^[\w\d\-_\.]{1,250}$/ and not be '.' or '..'` });
-    return;
-  }
-
-  const basketCreateResult = await createBasket(name);
-
-  if (basketCreateResult.error) {
-    console.error(basketCreateResult.error);
-    res.status(409).send({ error: `Basket ${name} already exists.` }); // Potential lie to front end for security (they can't know if db is down, but still get a useful message most of the time)
-  } else {
-    res.status(200).send(name);
-  }
-});
+app.use(parseBody);
+app.use("/api/baskets", apiRoutes);
 
 app.all("/:name*", async (req, res) => {
   const name = req.params.name;
