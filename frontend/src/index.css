@@ -38,9 +38,9 @@ body {
 
 .sidebar {
   min-width: 200px;
-  height: 500px;
+  height: auto;
   text-align: center;
-  border: 5px double #a50e07;
+  border: 5px double #db324d;
   margin-right: 20px;
   padding-bottom: 30px;
   border-radius: 10px;
@@ -85,6 +85,10 @@ button, .button {
   color: #453c3d;
 }
 
+button:hover, .button:hover {
+  background-color: #a499b3;
+}
+
 ul button {
   color: #453c3d;
   font-size: 20px;
@@ -95,9 +99,15 @@ ul {
   list-style-type: none;
 }
 
+pre {
+  white-space: pre-wrap;
+  font-family: "VT323";
+}
+
 .info-dropdown {
   border: 1px solid;
   margin: 10px;
+  text-wrap: word-wrap;
 }
 
 table {
@@ -107,17 +117,18 @@ table {
 }
 
 .info, .data {
-  border: 1px solid;
   text-align: left;
   padding-right: 30px;
 }
 
 .info {
-  min-width: 150px;
+  min-width: 170px;
+  color: #a499b3;
 }
 
 .data {
   flex: 1;
   min-width: 200px;
   width: 1000px;
+  border: 1px solid;
 }
