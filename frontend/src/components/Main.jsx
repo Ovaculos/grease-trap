@@ -27,8 +27,13 @@ function Main({ currBasket, baskets, setBaskets }) {
       return false;
     }
 
+    if (name === "." || name === "..") {
+      alert("If using a period '.' as your basket name, please use three or more periods like so: '...' !");
+      return false;
+    }
+
     if (!/^[\w\d\-_.]{1,250}$/.test(name)) {
-      alert("Your basket name should be in this pattern");
+      alert("Your basket name should only contain digits, letters, and these special characters: '.-_. ");
       return false;
     }
 
