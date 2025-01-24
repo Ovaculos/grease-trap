@@ -167,6 +167,7 @@ table {
 
 .info, .data {
   text-align: left;
+  vertical-align: top;
   padding-right: 30px;
 }
 
@@ -205,4 +206,13 @@ table {
   padding-right: 5px;
   border-width: 100px;
   border-color: #2a2526;
+}
+
+.path-link-container button {
+  font-size: 20px;
+}
+
+#total-requests {
+  text-align: left;
+  margin-left: 10px;
 }

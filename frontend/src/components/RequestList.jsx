@@ -45,7 +45,7 @@ function RequestList({ currBasket }) {
         <button onClick={() => copyURL()}>COPY URL</button>
       </div>
 
-      <p>Requests: {requests.length}</p>
+      <p id="total-requests">Total Requests: {requests.length}</p>
       <hr/>
       <table>
         <tbody>
