@@ -68,14 +68,13 @@ app.all("/:name*", async (req, res) => {
       }
     }
 
-    io.emit('newRequest', {
+    io.emit(name, {
         header,
         method,
         path,
         query,
         body,
         date_time,
-        name
     });
 
     res.status(200).send({ message: `Request was made` });

@@ -16,15 +16,14 @@ function RequestList({ currBasket }) {
   }, [currBasket]);
 
   useEffect(() => {
-    socket.on('newRequest', (data) => {
-      console.log(currBasket);
-      if (data.name === document.querySelector('h1').textContent) setRequests((prevRequests) => [data, ...prevRequests]);
+    socket.on(currBasket, (data) => {
+      setRequests((prevRequests) => [data, ...prevRequests]);
     });
 
     return () => {
-      socket.off('newRequest');
+      socket.off(currBasket);
     };
-  }, []);
+  }, [currBasket]);
 
   const fetchRequests = async () => {
     const data = await getRequests(currBasket);
