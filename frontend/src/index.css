@@ -216,3 +216,10 @@ table {
   text-align: left;
   margin-left: 10px;
 }
+
+#intro {
+  font-family: "VT323";
+  margin-block-end: 1em;
+  word-break: break-all;
+  overflow-wrap: break-word;
+}

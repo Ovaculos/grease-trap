@@ -5,7 +5,7 @@ function Header({ basket, returnToHome, destroyBasket}) {
       <div className='header'>
         <a  onClick={returnToHome}>HOME</a>
         <h1>{basket}</h1>
-        <button onClick={() => destroyBasket()}>Delete Basket</button>
+        <button onClick={() => destroyBasket()}>Destroy Basket</button>
       </div>
     )
   } else {

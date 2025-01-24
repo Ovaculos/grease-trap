@@ -92,12 +92,11 @@ function Main({ currBasket, baskets, setBaskets }) {
            />
           <input className="button" type="submit" value="Create Basket" />
         </form>
-        <div>
+        <div id="intro">
           <p>Here at GREASETRAP, we’re servin’ up piping-hot HTTP</p>
           <p>request baskets fresh off the griddle! </p><br></br>
-          <p>Create yourself a basket to collect and check</p>
-          <p>out all your request orders—nice and crispy.</p><br></br>
-          <p>Toss your webhooks our way, and we’ll keep the sizzle comin’!</p>
+          <p>Create yourself a basket and toss webhooks</p>
+          <p>our way, and we’ll keep the sizzle comin’!</p><br></br>
           <p>Debuggin’ never tasted so good. &#x1F35F;</p>
           
         </div>

@@ -31,7 +31,7 @@ function RequestList({ currBasket }) {
     setRequests(data);
   }
 
-  const basketURL = `https://OURURL/${currBasket}`;
+  const basketURL = `https://larebear007.org/${currBasket}`;
 
   const copyURL = async () => {
     await navigator.clipboard.writeText(basketURL);
