@@ -1,3 +1,9 @@
+## Grease Trap
+
+Grease Trap is an open-source http-request inspector. It provides real-time visualization of HTTP requests, allowing for easy testing / debugging.
+
+### Instructions
+
 You must add a `.env` file to backend with the `host`, `frontPort`, and `backPort` set to the same values. As the respective values on the frontend:
 
 ```
